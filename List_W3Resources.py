@@ -490,18 +490,13 @@ print(is_Sublist(a, c))
 ============================================================
 #Write a Python program to generate all sublists of a list.
 
-def subsets(s):
-    if s == []:
-        return [s]
-    sets = [s]
-    for i in range(0, len(s)):
-        tmp_subsets = subsets(s[:i] + s[i+1:])
-        for subset in tmp_subsets:
-            if subset not in sets:
-                sets.append(subset)
-    return sets
-    
-print(subsets([1,2,3,4,-5]))
+def sub_lists(my_list):
+  for i in range(len(my_list)):
+    n=i+1
+    while n < len(my_list):
+      sublist=my_list[i:n]
+      print(sublist)
+      n+=1
   
   
 l1 = [10, 20, 30, 40]
@@ -549,138 +544,441 @@ print(result)
 
 ============================================================
 
-#Write a Python program to get variable unique identification number or string. 
+#Write a Python program to get variable unique identification number or string.
+#the id() function: Return the “identity” of an object. This is an integer (or long integer)
+#which is guaranteed to be unique and constant for this object during its lifetime.
+#Two objects with non-overlapping lifetimes may have the same id() value.
+
+def function1(str1):
+  return (id(str1))
+    
+print(function1(100))
+print(function1("w3resources.com"))
+print(function1("w3resources.com"))
+x=100
+print(function1(x))
+============================================================
+#Write a Python program to find common items from two lists.
+
+color1 = ["Red", "Green", "Orange", "White"]
+color2 = ["Black", "Green", "White", "Pink"]
+print(set(color1).intersection(set(color2)))
+============================================================
+#Write a Python program to change the position of every n-th value with the (n+1)th in a list.
+
+def replace2copy(n):
+  for i in range(0,len(n),2):
+    n[i] , n[i+1]=n[i+1] , n[i]
+  return n
+
+
+
+n = [0,1,2,3,4,5]
+#output : [1, 0, 3, 2, 5, 4]
+print(replace2copy(n))
+============================================================
+#Write a Python program to convert a list of multiple integers into a single integer.
+L = [11, 33, 50]
+print("Original List: ",L)
+str1=''
+for i in L:
+  str1+=str(i)
+print("Combined List: ", str1)
+
+OR
+
+L = [11, 33, 50]
+print("Original List: ",L)
+L1=map(str,L)
+print("Combined String: " ''.join(L1))
+
+============================================================
+#Write a Python program to split a list based on first character of word.
+
+word_list = ['be','have','do','say','get','make','go','know','take','see','come','think',
+     'look','want','give','use','find','tell','ask','work','seem','feel','leave','call']
+	 
+word_list = ['be','have','do','say','get','make','go','know','take','see','come','think',
+     'look','want','give','use','find','tell','ask','work','seem','feel','leave','call']
+     
+     
+def split(list1):
+  d1=dict()
+  list2=list()
+  for i in list1:
+    j=i[0]
+    if j in d1.keys():
+      d1[j].append(i)
+    else:
+      d1[j]=[i]
+  return d1
+      
+      
+print(split(word_list))
+
+============================================================
+#Write a Python program to create multiple lists.
+obj=dict()
+for i in range(1, 21):
+    obj[str(i)] = []
+print(obj)
+
+
+============================================================
+
+#Write a Python program to find missing and additional values in two lists.
+
+list1 = ['a','b','c','d','e','f']
+list2 = ['d','e','f','g','h']
+
+def unique_values(list1,list2):
+  missing=[]
+  extra=[]
+  for i in list1:
+    if i not in list2:
+      extra.append(i)
+  for j in list2:
+    if j not in list1:
+      missing.append(j)
+  return(missing,extra)
+  
+print(unique_values(list1,list2))
+
+OR
+
+list1 = ['a','b','c','d','e','f']
+list2 = ['d','e','f','g','h']
+
+def unique_values(list1,list2):
+  set1=set(list1)
+  set2=set(list2)
+  return (set1.difference(set2) , set2.difference(set1))
+  
+print(unique_values(list1,list2))
+
+============================================================
+
+#Write a Python program to split a list into different variables. 	
+color = [("Black", "#000000", "rgb(0, 0, 0)"), ("Red", "#FF0000", "rgb(255, 0, 0)"),
+         ("Yellow", "#FFFF00", "rgb(255, 255, 0)")]
+         
+for i in color:
+  print(i)
+  
+OR
+
+color = [("Black", "#000000", "rgb(0, 0, 0)"), ("Red", "#FF0000", "rgb(255, 0, 0)"),
+         ("Yellow", "#FFFF00", "rgb(255, 255, 0)")]
+var1,var2,var3 = color
+print(var1,var2,var3)
+
+============================================================
+
+#Write a Python program to generate groups of five consecutive numbers in a list.
+
+list1=[[ 5*i+j for j in range(1,6)] for i in range(0,5)]
+print(list1)
+============================================================
+#Write a Python program to convert a pair of values into a sorted unique array.
+Original List:  [(1, 2), (3, 4), (1, 2), (5, 6), (7, 8), (1, 2), (3, 4), (3, 4), (7, 8), (9, 10)]             
+Sorted Unique Data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]  
+
+List1=[(1, 2), (3, 4), (1, 2), (5, 6), (7, 8), (1, 2), (3, 4), (3, 4), (7, 8), (9, 10)]  
+
+def unique_list(list1):
+  list2=[]
+  for i in list1:
+    for j in i:
+      if j not in list2:
+        list2.append(j)
+  return list2
+  
+print(unique_list(List1))
+
+
+============================================================
+#Write a Python program to select the odd items of a list.
+
+x = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+print([i for i in x if i%2 != 0 ])
+
+OR
+
+
+x = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+x[::2]
+
+============================================================
+#Write a Python program to insert an element before each element of a list.
+
+List1=['Red', 'Green', 'Black']
+List2=[]
+for i in List1:
+  List2.append('c')
+  List2.append(i)
+  
+print(List2)
+
+OR
+
+List1=['Red', 'Green', 'Black']
+List2=[j for i in List1 for j in ('c' , i)] 
+
+print(List2)
+
+============================================================
+#Write a Python program to print a nested lists (each list on a new line) using the print() function.
+
+colors = [['Red'], ['Green'], ['Black']]
+for i in colors:
+  print(i)
+  
+============================================================
+#Write a Python program to convert list to list of dictionaries.
+
+color_name = ["Black", "Red", "Maroon", "Yellow"]
+color_code = ["#000000", "#FF0000", "#800000", "#FFFF00"]
+
+result=[{'color_name' : n , 'color_code' : c } for n,c in zip(color_name , color_code)]
+print(result)
+
+OR
+
+color_name = ["Black", "Red", "Maroon", "Yellow"]
+color_code = ["#000000", "#FF0000", "#800000", "#FFFF00"]
+
+result=[]
+for i in range(len(color_name)):
+  result.append({'color_name' : color_name[i] , 'color_code' : color_code[i] })
+print(result)
+
+============================================================
+
+#Write a Python program to sort a list of nested dictionaries.
+
+my_list = [{'key': {'subkey': 1}}, {'key': {'subkey': 10}}, {'key': {'subkey': 5}}]
+my_list.sort(key=lambda e: e['key']['subkey'], reverse=True)
 
 =============================================================
-#Write a Python program to get first prime_number after the provided number.
-#python 3.5.2
+#Write a Python program to split a list every Nth element.
+C = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n']
+n=4
+list1=[[] for k in range(n)]
+for j in range(n):
+  count=0
+  for i in range(len(C)):
+    if i%n == j:
+      print(j)
+      list1[j].append(C[i])
+      count+=1
+      
+print(list1)
 
-def prime(num):
-    for i in range(2,num):
-        if num%i ==0:
-            return False
-    return True
 
-def next_prime(num1):
-    results=[]
-    for i in range(num1,num1*2):
-        if prime(i):
-            results.append(i)
-    print(results[0])
+OR
+
+C = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n']
+n=4
+list1=[C[i::n] for i in range(n)]
+print(list1)
+
+=============================================================
+#Write a Python program to compute the similarity between two lists. 
+
+color1 = ["red", "orange", "green", "blue", "white"]
+color2 = ["black", "yellow", "green", "blue"]
+
+print(set(color1).difference(set(color2)))
+print(set(color2).difference(set(color1)))
+=============================================================
+#Write a Python program to create a list with infinite elements.
+
+import itertools
+c = itertools.count()
+print(next(c))
+print(next(c))
+print(next(c))
+print(next(c))
+print(next(c))
+
+=============================================================
+#From 54 till 71
+#Write a Python program to concatenate elements of a list.
+color = ['red', 'green', 'orange']
+string1=''
+for i in color:
+  string1+=i
+print(string1)
+
+OR
+
+color = ['red', 'green', 'orange']
+string1=''
+print('-'.join(color))
+
+#Write a Python program to remove key values pairs from a list of dictionaries.
+
+list1=[{'key1': 'value1', 'key2': 'value2'}, {'key1': 'value3', 'key2': 'value4'}]
+
+list2=[ { j:k for j,k in i.items() if j!= 'key1' } for i in list1   ]
+print(list2)
+============================================================================
+
+#Write a Python program to convert a string to a list.
+
+s1 ="['Red', 'Green', 'White']"
+list1=[]
+for i in s1[1:-1].split(','):
+  list1.append(i.strip()[1:-1])
   
-print(next_prime(100))
-===================================================================
-#Write a Python program to merge sorted list/array
+print(list1)
 
-arr1 = [ 1, 3, 4, 5]
-arr2 = [2, 4, 6, 8]
+====================================================================================
+#Write a Python program to check if all items of a list is equal to a given string.
+color1 = ["green", "orange", "black", "white"]
+color2 = ["green", "green", "green", "green"]
 
-def merge(l1,l2):
-    l3=l1+l2
-    l3.sort()
-    return set(l3)
+print(all( i=='blue' for i in color1  ))
+print( all( j=='green' for j in color2 ) )
 
-print(merge(arr1,arr2))
-====================================================================
-#Write a Python program to find the max occurence of a character in a string.
+====================================================================================
+#Write a Python program to replace the last element in a list with another list.
+num1 = [1, 3, 5, 7, 9, 10]
+num2 = [2, 4, 6, 8]
 
-def count(string1):
-    d1=dict()
-    for i in string1:
-        if 'a' <= i <= 'z' or 'A' <= i <= 'Z':
-            d1[i]=d1.get(i,0)+1
-    for i,j in d1.items():
-        if j == max(d1.values()):
-            return i
+print( num1[:-1] + num2 )
+
+====================================================================================
+#Write a Python program to check if the n-th element exists in a given list.
+x = [1, 2, 3, 4, 5, 7]
+
+def nthelement(x):
+  n=len(x)
+  for i in x:
+    if i ==n:
+      return True
+  return False
+  
+print(nthelement(x) )
+====================================================================================
+#Write a Python program to find a tuple, the smallest second index value from a list of tuples.
+
+x = [(4, 1), (1, 2), (6, 0)]
+x.sort( key= lambda n : (n[1] , n[0]))
+print(x)
+====================================================================================
+#Write a Python program to create a list of empty dictionaries.
+n=int(input("Enter a number:"))
+list1=[ {} for i in range(n) ]
+print(list1)
+====================================================================================
+#Write a Python program to print a list of space-separated elements.
+# * symbol is use to print the list elements in a single line with space.
+#To print all elements in new lines or separated by space use sep=”\n” or sep=”, ” respectively.
+#The *args parameter provides for 0 or more positional arguments, which are accessible inside the function via a list named args.
+num = [1, 2, 3, 4, 5]
+for i in num:
+  print(i , end=' ')
+  
+OR
+
+num = [1, 2, 3, 4, 5]
+print(*num)
+  
+====================================================================================
+#Write a Python program to insert a given string at the beginning of all items in a list.
+num = [1,2,3,4]
+string1="emp"
+print( [ string1+str(i) for i in num  ]  )
+
+OR
+
+num = [1,2,3,4]
+print( [ 'emp{0}'.format(i) for i in num  ]  )
+====================================================================================
+#Write a Python program to iterate over two lists simultaneously.
+num = [1, 2, 3]
+color = ['red', 'while', 'black']
+print(zip(num,color))
+for i,j in zip(num,color ):
+  print(i,j)
+
+====================================================================================
+#Write a Python program to access dictionary keys element by index.
+num = {'physics': 80, 'math': 90, 'chemistry': 86}
+print(list(num)[0])
+
+====================================================================================
+#Write a Python program to find the list in a list of lists whose sum of elements is the highest.
+num = [[1,2,3], [4,5,6], [10,11,12], [7,8,9]]
+
+print(max(num , key=lambda x : sum(x)))
+OR
+
+num = [[1,2,3], [4,5,6], [10,11,12], [7,8,9]]
+print(max(num , key=sum))
+
+====================================================================================
+#Write a Python program to find all the values in a list are greater than a specified number.
+list1 = [220, 330, 500]
+list2 = [12, 17, 21]
+n=int(input("Enter a Number: "))
+
+print( [ x for x in list1 if x > n]  )
+print( [ x for x in list1 if x > n]  )
+
+====================================================================================
+#Write a Python program to extend a list without append. 
+x = [10, 20, 30]
+y = [40, 50, 60]
+x[-1:]=y 
+print(x)
+
+OR
+x = [10, 20, 30]
+y = [40, 50, 60]
+x[:0]=y 
+print(x)
+
+OR
+
+x = [10, 20, 30]
+y = [40, 50, 60]
+print(x+y)
+====================================================================================
+
+#Write a Python program to remove duplicates from a list of lists.
+num = [[10, 20], [40], [30, 56, 25], [10, 20], [33], [40]]
+num1=list()
+for i in num:
+  if i not in num1:
+    num1.append(i)
     
+print(num1)
 
-print(count("Given two sorted arrays, the task is to merge them in a sorted manner"))
-=====================================================================
-#Write a python program to print all sub array or list that sum upto 0.
 
-def subsets(s):
-    sets = [s]
-    for i in range(0, len(s)):
-        #print(s[:i] + s[i+1:])
-        tmp_subsets = subsets(s[:i] + s[i+1:])
-        #print(tmp_subsets)
-        for subset in tmp_subsets:
-            if subset not in sets:
-                sets.append(subset)
-    return sets
-    
-def subsets_s(list1):
-    for i in subsets(list1):
-        if sum(i) == 0:
-            print(i)
-    
-print(subsets_s([1,2,3,-3]))
-========================================================================
-#Anagram Program.
+====================================================================================
+#Write a Python program to get the depth of a dictionary.
 
-def anagram(str1,str2):
-    result=True
-    if len(str1) != len(str2):
-        result=False
-    else:
-        for i in str1:
-            if i not in str2:
-                result=False
-                
-    return result
+def dict_depth(d):
+    if isinstance(d, dict):
+        return 1 + (max(map(dict_depth, d.values())) if d else 0)
+    return 0
+dic = {'a':1, 'b': {'c': {'d': {'e' :{}}}}}
+print(dict_depth(dic))
 
-print(anagram("sneha","anehs"))
+====================================================================================
+#Write a Python program to check if all dictionaries in a list are empty or not
 
-==========================================================================
-#Boolean matrix problem  make all the values in a row or column as 1 if there are atleat one 1 in that row or column
+my_list = [{},{},{}]
+my_list1 = [{1,2},{},{}]
 
-def matrix(list1):
-    row=[0]* len(list1[0])
-    col=[0] * len(list1)
-    #print(row,col)
-    for i in range(len(list1)):
-        for j in range(len(list1[i])):
-            if list1[i][j]==1:
-                row[i]=col[j]=1
-    print(row,col)
-    for i in range(len(row)):
-        for j in range(len(col)):
-            if row[i]==1 or col[j]==1:
-                list1[i][j]=1
-                
-    return list1
+def emptylist(list1):
+  for i in list1:
+    if i != {}:
+      return False
+      
+print( emptylist(my_list)  )
+print( emptylist(my_list1)  )
 
-list1=[[0,1,0],[0,0,0],[0,1,0]]
-print(matrix(list1))
-
-==========================================================================         
-#Write a python program for given array where consecutive digits difference out to particular set of values and Number N.
-
-def pair(list1 , n ):
-    for i in range(len(list1)):
-        for j in range(i+1 , len(list1)):
-            if list1[i]-list1[j] == n or list1[j]-list1[i] ==n:
-                return list1[i],list1[j]
-    return None   
-        
-        
-list1= [5, 20, 3, 50, 80 , 42]
-n = 78
-print(pair(list1,n))
-
-========================================================================== 
-
-#Given two numbers ‘a’ and b’. Write a program to count number of bits needed to be flipped to convert ‘a’ to ‘b’.
-
-a = 10
-b = 20
-def countSetBits( n ):
-    count = 0
-    while n:
-        count =count + (n & 1)
-        n >>= 1
-    return count
-
-print(countSetBits(a^b))
-========================================================================== 
-
+=============================================================
